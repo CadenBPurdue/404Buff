@@ -118,6 +118,10 @@ char * clientComm(int clntSockfd,int * senderBuffSize_addr, int * optlen_addr){
         exit(1);
     }    
 
+    // This line will cut off any excess string that is longer than the buffer allocated.
+    recvBuff[MAX_DATA_SIZE] = '\0';
+
+    // Strcopy does not check the buffer of the string it's copying which allows it to be exploted with buffer overflow.
     strcpy(str, recvBuff);
 	
     /* send data to the client */
